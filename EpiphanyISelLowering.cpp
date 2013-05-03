@@ -1014,15 +1014,15 @@ SelectionDAG &DAG = DCI.DAG;
 
 	// FSUB -> FMA combines:
 
-    // fold (fsub (fmul x, y), z) -> (fma x, y, (fneg z))
+    // fold (fsub (fmul x, y), z) -> (fma z, x, y)
     if (N0.getOpcode() == ISD::FMUL && N0->hasOneUse()) {
-		return DAG.getNode(EpiphanyISD::FM_A_S, N->getDebugLoc(), VT, N0.getOperand(0), N0.getOperand(1), N1, DAG.getConstant(1, MVT::i32));
+		return DAG.getNode(EpiphanyISD::FM_A_S, N->getDebugLoc(), VT, N1, N0.getOperand(0), N0.getOperand(1), DAG.getConstant(1, MVT::i32));
     }
 
-    // fold (fsub x, (fmul y, z)) -> (fma (fneg y), z, x)
+    // fold (fsub x, (fmul y, z)) -> (fma x, y, z)
     // Note: Commutes FSUB operands.
     if (N1.getOpcode() == ISD::FMUL && N1->hasOneUse()) {
-		return DAG.getNode(EpiphanyISD::FM_A_S, N->getDebugLoc(), VT, N1.getOperand(0), N1.getOperand(1), N0, DAG.getConstant(1, MVT::i32));
+		return DAG.getNode(EpiphanyISD::FM_A_S, N->getDebugLoc(), VT, N0, N1.getOperand(0), N1.getOperand(1), DAG.getConstant(1, MVT::i32));
     }
 
     // fold (fsub (-(fmul, x, y)), z) -> (fma (fneg x), y, (fneg z))
@@ -1048,15 +1048,15 @@ DebugLoc dl = N->getDebugLoc();
 SelectionDAG &DAG = DCI.DAG;
 
 	// FADD -> FMA combines:
-	// fold (fadd (fmul x, y), z) -> (fma x, y, z)
+	// fold (fadd (fmul x, y), z) -> (fma z, x, y)
 	if (N0.getOpcode() == ISD::FMUL && N0->hasOneUse()) {
-		return DAG.getNode(EpiphanyISD::FM_A_S, N->getDebugLoc(), VT, N0.getOperand(0), N0.getOperand(1), N1, DAG.getConstant(0, MVT::i32));
+		return DAG.getNode(EpiphanyISD::FM_A_S, N->getDebugLoc(), VT, N1, N0.getOperand(0), N0.getOperand(1), DAG.getConstant(0, MVT::i32));
 	}
 
-	// fold (fadd x, (fmul y, z)) -> (fma y, z, x)
+	// fold (fadd x, (fmul y, z)) -> (fma x, y, z)
 	// Note: Commutes FADD operands.
 	if (N1.getOpcode() == ISD::FMUL && N1->hasOneUse()) {
-		return DAG.getNode(EpiphanyISD::FM_A_S, N->getDebugLoc(), VT, N1.getOperand(0), N1.getOperand(1), N0, DAG.getConstant(0, MVT::i32));
+		return DAG.getNode(EpiphanyISD::FM_A_S, N->getDebugLoc(), VT, N0, N1.getOperand(0), N1.getOperand(1), DAG.getConstant(0, MVT::i32));
 	}
 
 	return SDValue();
