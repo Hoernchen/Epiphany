@@ -89,6 +89,7 @@ def FPR32 : RegisterClass<"Epiphany", [f32], 32, (add GPR32)> {
 }
 
 def DPR64 : RegisterClass<"Epiphany", [i64,f64], 64, (sequence "D%u", 0, 30)> {
+	let CopyCost = 2;
 }
 
 // Flags register

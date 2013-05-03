@@ -369,17 +369,25 @@ bool EpiphanyPreAllocLoadStoreOpt::RescheduleOps(MachineBasicBlock *MBB,
 								// Collect all the uses of this MI's DPR def for updating later.
 								SmallVector<MachineOperand*, 8> Uses0,Uses1;
 
-								for (MachineRegisterInfo::use_iterator I = MRI->use_begin(Op0->getOperand(0).getReg()),E = MRI->use_end(); I != E; ++I)
-									Uses0.push_back(&I.getOperand());
+								//for (MachineRegisterInfo::use_iterator I = MRI->use_begin(Op0->getOperand(0).getReg()),E = MRI->use_end(); I != E; ++I)
+								//	Uses0.push_back(&I.getOperand());
 
-								for (MachineRegisterInfo::use_iterator I = MRI->use_begin(Op1->getOperand(0).getReg()),E = MRI->use_end(); I != E; ++I)
-									Uses1.push_back(&I.getOperand());
+								//for (MachineRegisterInfo::use_iterator I = MRI->use_begin(Op1->getOperand(0).getReg()),E = MRI->use_end(); I != E; ++I)
+								//	Uses1.push_back(&I.getOperand());
 
-								for (SmallVector<MachineOperand*, 8>::const_iterator I = Uses0.begin(), E = Uses0.end(); I != E; ++I)
-									(*I)->substVirtReg(DoubleReg, Epiphany::sub_even, *TRI);
 
-								for (SmallVector<MachineOperand*, 8>::const_iterator I = Uses1.begin(), E = Uses1.end(); I != E; ++I)
-									(*I)->substVirtReg(DoubleReg, Epiphany::sub_odd, *TRI);
+								BuildMI(*MBB, InsertPos, dl, TII->get(Epiphany::COPY))
+									.addReg(Op0->getOperand(0).getReg(), RegState::Define)
+									.addReg(DoubleReg, 0, Epiphany::sub_odd);
+								BuildMI(*MBB, InsertPos, dl, TII->get(Epiphany::COPY))
+									.addReg(Op1->getOperand(0).getReg(), RegState::Define)
+									.addReg(DoubleReg, 0, Epiphany::sub_even);
+
+								//for (SmallVector<MachineOperand*, 8>::const_iterator I = Uses0.begin(), E = Uses0.end(); I != E; ++I)
+								//	(*I)->substVirtReg(DoubleReg, Epiphany::sub_even, *TRI);
+
+								//for (SmallVector<MachineOperand*, 8>::const_iterator I = Uses1.begin(), E = Uses1.end(); I != E; ++I)
+								//	(*I)->substVirtReg(DoubleReg, Epiphany::sub_odd, *TRI);
 
 							} else {//store
 

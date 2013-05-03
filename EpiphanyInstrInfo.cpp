@@ -59,13 +59,6 @@ void EpiphanyInstrInfo::copyPhysReg(MachineBasicBlock &MBB,
   
     llvm_unreachable("Unknown register class in copyPhysReg");
 
-
- // //MDNode* comment = MDNode::get(getGlobalContext(), ArrayRef<Value*>(llvm::MDString::get(getGlobalContext(), "BAH")));
- // // E.g. ORR xDst, xzr, xSrc, lsl #0
- // BuildMI(MBB, I, DL, get(Opc), DestReg)
- //   .addReg(ZeroReg)
- //   .addReg(SrcReg)
-	//.addImm(0);//.addMetadata(comment)
 }
 
 MachineInstr *
