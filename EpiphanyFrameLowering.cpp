@@ -54,8 +54,8 @@ void EpiphanyFrameLowering::emitPrologue(MachineFunction &MF) const {
   DebugLoc DL = MBBI != MBB.end() ? MBBI->getDebugLoc() : DebugLoc();
 
   MachineModuleInfo &MMI = MF.getMMI();
-  std::vector<MachineMove> &Moves = MMI.getFrameMoves();
-  bool NeedsFrameMoves = MMI.hasDebugInfo() || MF.getFunction()->needsUnwindTableEntry();
+  bool NeedsFrameMoves = MMI.hasDebugInfo()
+    || MF.getFunction()->needsUnwindTableEntry();
 
   uint64_t NumInitialBytes, NumResidualBytes;
 
@@ -97,7 +97,7 @@ void EpiphanyFrameLowering::emitPrologue(MachineFunction &MF) const {
 
     MachineLocation Dst(MachineLocation::VirtualFP);
     MachineLocation Src(Epiphany::SP, NumInitialBytes);
-    Moves.push_back(MachineMove(SPLabel, Dst, Src));
+    MMI.addFrameMove(SPLabel, Dst, Src);
   }
 
   // Otherwise we need to set the frame pointer and/or add a second stack
@@ -164,7 +164,7 @@ void EpiphanyFrameLowering::emitPrologue(MachineFunction &MF) const {
 
     MachineLocation Dst(MachineLocation::VirtualFP);
     MachineLocation Src(Epiphany::SP, NumResidualBytes + NumInitialBytes);
-    Moves.push_back(MachineMove(CSLabel, Dst, Src));
+    MMI.addFrameMove(CSLabel, Dst, Src);
   }
 
   // And any callee-saved registers (it's fine to leave them to the end here,
@@ -182,7 +182,7 @@ void EpiphanyFrameLowering::emitPrologue(MachineFunction &MF) const {
       MachineLocation Dst(MachineLocation::VirtualFP,
                           MFI->getObjectOffset(I->getFrameIdx()));
       MachineLocation Src(I->getReg());
-      Moves.push_back(MachineMove(CSLabel, Dst, Src));
+      MMI.addFrameMove(CSLabel, Dst, Src);
     }
   }
 }
