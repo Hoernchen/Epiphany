@@ -57,13 +57,14 @@ static MCRegisterInfo *createEpiphanyMCRegisterInfo(StringRef Triple) {
   return X;
 }
 
-static MCAsmInfo *createEpiphanyMCAsmInfo(const Target &T, StringRef TT) {
+static MCAsmInfo *createEpiphanyMCAsmInfo(const MCRegisterInfo &MRI,
+                                          StringRef TT) {
   Triple TheTriple(TT);
 
   MCAsmInfo *MAI = new EpiphanyELFMCAsmInfo();
-  MachineLocation Dst(MachineLocation::VirtualFP);
-  MachineLocation Src(Epiphany::SP, 0);
-  MAI->addInitialFrameState(0, Dst, Src);
+  unsigned Reg = MRI.getDwarfRegNum(Epiphany::SP, true);
+  MCCFIInstruction Inst = MCCFIInstruction::createDefCfa(0, Reg, 0);
+  MAI->addInitialFrameState(Inst);
 
   return MAI;
 }
