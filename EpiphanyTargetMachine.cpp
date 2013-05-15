@@ -45,6 +45,7 @@ EpiphanyTargetMachine::EpiphanyTargetMachine(const Target &T, StringRef TT,
     TLInfo(*this),
     TSInfo(*this),
     FrameLowering(Subtarget) {
+      initAsmInfo();
 }
 
 namespace {
