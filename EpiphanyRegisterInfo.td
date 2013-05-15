@@ -43,39 +43,39 @@ foreach Index = 15-63 in {
 }
 
 let SubRegIndices = [sub_even, sub_odd] in {
-def D0  : EpiphanyRegWithSubs<0,  "d0", [R0,   R1]>, DwarfRegNum<[0,1]>;
-def D1  : EpiphanyRegWithSubs<2,  "d1", [R2,   R3]>, DwarfRegNum<[2,3]>;
-def D2  : EpiphanyRegWithSubs<4,  "d2", [R4,   R5]>, DwarfRegNum<[4,5]>;
-def D3  : EpiphanyRegWithSubs<6,  "d3", [R6,   R7]>, DwarfRegNum<[6,7]>;
-def D4  : EpiphanyRegWithSubs<8,  "d4", [R8,   R9]>, DwarfRegNum<[8,9]>;
-def D5  : EpiphanyRegWithSubs<10,  "d5", [R10,   R11]>, DwarfRegNum<[10,11]>;
+def D0  : EpiphanyRegWithSubs<0,  "r0", [R0,   R1]>, DwarfRegNum<[0,1]>;
+def D1  : EpiphanyRegWithSubs<2,  "r2", [R2,   R3]>, DwarfRegNum<[2,3]>;
+def D2  : EpiphanyRegWithSubs<4,  "r4", [R4,   R5]>, DwarfRegNum<[4,5]>;
+def D3  : EpiphanyRegWithSubs<6,  "r6", [R6,   R7]>, DwarfRegNum<[6,7]>;
+def D4  : EpiphanyRegWithSubs<8,  "r8", [R8,   R9]>, DwarfRegNum<[8,9]>;
+def D5  : EpiphanyRegWithSubs<10,  "r10", [R10,   R11]>, DwarfRegNum<[10,11]>;
 
-def D6  : EpiphanyRegWithSubs<12,  "d6", [R12,   SP]>, DwarfRegNum<[12,13]>;
-def D7  : EpiphanyRegWithSubs<14,  "d7", [LR,   R15]>, DwarfRegNum<[14,15]>;
+def D6  : EpiphanyRegWithSubs<12,  "r12", [R12,   SP]>, DwarfRegNum<[12,13]>;
+def D7  : EpiphanyRegWithSubs<14,  "r14", [LR,   R15]>, DwarfRegNum<[14,15]>;
 
-def D8  : EpiphanyRegWithSubs<16,  "d8", [R16,   R17]>, DwarfRegNum<[16,17]>;
-def D9  : EpiphanyRegWithSubs<18,  "d9", [R18,   R19]>, DwarfRegNum<[18,19]>;
-def D10  : EpiphanyRegWithSubs<20,  "d10", [R20,   R21]>, DwarfRegNum<[20,21]>;
-def D11  : EpiphanyRegWithSubs<22,  "d11", [R22,   R23]>, DwarfRegNum<[22,23]>;
-def D12  : EpiphanyRegWithSubs<24,  "d12", [R24,   R25]>, DwarfRegNum<[24,25]>;
-def D13  : EpiphanyRegWithSubs<26,  "d13", [R26,   R27]>, DwarfRegNum<[26,27]>;
-def D14  : EpiphanyRegWithSubs<28,  "d14", [R28,   R29]>, DwarfRegNum<[28,29]>;
-def D15  : EpiphanyRegWithSubs<30,  "d15", [R30,   R31]>, DwarfRegNum<[30,31]>;
-def D16  : EpiphanyRegWithSubs<32,  "d16", [R32,   R33]>, DwarfRegNum<[32,33]>;
-def D17  : EpiphanyRegWithSubs<34,  "d17", [R34,   R35]>, DwarfRegNum<[34,35]>;
-def D18  : EpiphanyRegWithSubs<36,  "d18", [R36,   R37]>, DwarfRegNum<[36,37]>;
-def D19  : EpiphanyRegWithSubs<38,  "d19", [R38,   R39]>, DwarfRegNum<[38,39]>;
-def D20  : EpiphanyRegWithSubs<40,  "d20", [R40,   R41]>, DwarfRegNum<[40,41]>;
-def D21  : EpiphanyRegWithSubs<42,  "d21", [R42,   R43]>, DwarfRegNum<[42,43]>;
-def D22  : EpiphanyRegWithSubs<44,  "d22", [R44,   R45]>, DwarfRegNum<[44,45]>;
-def D23  : EpiphanyRegWithSubs<46,  "d23", [R46,   R47]>, DwarfRegNum<[46,47]>;
-def D24  : EpiphanyRegWithSubs<48,  "d24", [R48,   R49]>, DwarfRegNum<[48,49]>;
-def D25  : EpiphanyRegWithSubs<50,  "d25", [R50,   R51]>, DwarfRegNum<[50,51]>;
-def D26  : EpiphanyRegWithSubs<52,  "d26", [R52,   R53]>, DwarfRegNum<[52,53]>;
-def D27  : EpiphanyRegWithSubs<54,  "d27", [R54,   R55]>, DwarfRegNum<[54,55]>;
-def D28  : EpiphanyRegWithSubs<56,  "d28", [R56,   R57]>, DwarfRegNum<[56,57]>;
-def D29  : EpiphanyRegWithSubs<58,  "d29", [R58,   R59]>, DwarfRegNum<[58,59]>;
-def D30  : EpiphanyRegWithSubs<60,  "d30", [R60,   R61]>, DwarfRegNum<[60,61]>;
+def D8  : EpiphanyRegWithSubs<16,  "r16", [R16,   R17]>, DwarfRegNum<[16,17]>;
+def D9  : EpiphanyRegWithSubs<18,  "r18", [R18,   R19]>, DwarfRegNum<[18,19]>;
+def D10  : EpiphanyRegWithSubs<20,  "r20", [R20,   R21]>, DwarfRegNum<[20,21]>;
+def D11  : EpiphanyRegWithSubs<22,  "r22", [R22,   R23]>, DwarfRegNum<[22,23]>;
+def D12  : EpiphanyRegWithSubs<24,  "r24", [R24,   R25]>, DwarfRegNum<[24,25]>;
+def D13  : EpiphanyRegWithSubs<26,  "r26", [R26,   R27]>, DwarfRegNum<[26,27]>;
+def D14  : EpiphanyRegWithSubs<28,  "r28", [R28,   R29]>, DwarfRegNum<[28,29]>;
+def D15  : EpiphanyRegWithSubs<30,  "r30", [R30,   R31]>, DwarfRegNum<[30,31]>;
+def D16  : EpiphanyRegWithSubs<32,  "r32", [R32,   R33]>, DwarfRegNum<[32,33]>;
+def D17  : EpiphanyRegWithSubs<34,  "r34", [R34,   R35]>, DwarfRegNum<[34,35]>;
+def D18  : EpiphanyRegWithSubs<36,  "r36", [R36,   R37]>, DwarfRegNum<[36,37]>;
+def D19  : EpiphanyRegWithSubs<38,  "r38", [R38,   R39]>, DwarfRegNum<[38,39]>;
+def D20  : EpiphanyRegWithSubs<40,  "r40", [R40,   R41]>, DwarfRegNum<[40,41]>;
+def D21  : EpiphanyRegWithSubs<42,  "r42", [R42,   R43]>, DwarfRegNum<[42,43]>;
+def D22  : EpiphanyRegWithSubs<44,  "r44", [R44,   R45]>, DwarfRegNum<[44,45]>;
+def D23  : EpiphanyRegWithSubs<46,  "r46", [R46,   R47]>, DwarfRegNum<[46,47]>;
+def D24  : EpiphanyRegWithSubs<48,  "r48", [R48,   R49]>, DwarfRegNum<[48,49]>;
+def D25  : EpiphanyRegWithSubs<50,  "r50", [R50,   R51]>, DwarfRegNum<[50,51]>;
+def D26  : EpiphanyRegWithSubs<52,  "r52", [R52,   R53]>, DwarfRegNum<[52,53]>;
+def D27  : EpiphanyRegWithSubs<54,  "r54", [R54,   R55]>, DwarfRegNum<[54,55]>;
+def D28  : EpiphanyRegWithSubs<56,  "r56", [R56,   R57]>, DwarfRegNum<[56,57]>;
+def D29  : EpiphanyRegWithSubs<58,  "r58", [R58,   R59]>, DwarfRegNum<[58,59]>;
+def D30  : EpiphanyRegWithSubs<60,  "r60", [R60,   R61]>, DwarfRegNum<[60,61]>;
 // def D31  : EpiphanyRegWithSubs<62,  "d31", [R62,   R63]>, DwarfRegNum<[62,63]>;
 }
 
