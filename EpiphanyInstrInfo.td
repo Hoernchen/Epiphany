@@ -445,8 +445,8 @@ multiclass A64I_LDRSTR_unsigned<string prefix, bits<2> size, bit v,
 
 defm LS8 : A64I_LDRSTR_unsigned<"LS8", 0b00, 0b0, 0b0, "b", GPR32, byte_simm11>;
 defm LS16 : A64I_LDRSTR_unsigned<"LS16", 0b01, 0b0, 0b0, "h", GPR32, hword_simm11>;
-defm LS32 : A64I_LDRSTR_unsigned<"LS32", 0b10, 0b0, 0b0, "w", GPR32, word_simm11>;
-defm LSFP32 : A64I_LDRSTR_unsigned<"LSFP32", 0b10, 0b1, 0b0, "w", FPR32, word_simm11>;
+defm LS32 : A64I_LDRSTR_unsigned<"LS32", 0b10, 0b0, 0b0, "", GPR32, word_simm11>;
+defm LSFP32 : A64I_LDRSTR_unsigned<"LSFP32", 0b10, 0b1, 0b0, "", FPR32, word_simm11>;
 defm LSFP64 : A64I_LDRSTR_unsigned<"LSFP64", 0b11, 0b1, 0b0, "d", DPR64, dword_simm11>;
 
 
