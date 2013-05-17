@@ -54,6 +54,7 @@ void EpiphanyFrameLowering::emitPrologue(MachineFunction &MF) const {
   DebugLoc DL = MBBI != MBB.end() ? MBBI->getDebugLoc() : DebugLoc();
 
   MachineModuleInfo &MMI = MF.getMMI();
+  const MCRegisterInfo &MRI = MMI.getContext().getRegisterInfo();
   bool NeedsFrameMoves = MMI.hasDebugInfo()
     || MF.getFunction()->needsUnwindTableEntry();
 
@@ -96,8 +97,9 @@ void EpiphanyFrameLowering::emitPrologue(MachineFunction &MF) const {
       .addSym(SPLabel);
 
     MachineLocation Dst(MachineLocation::VirtualFP);
-    MachineLocation Src(Epiphany::SP, NumInitialBytes);
-    MMI.addFrameMove(SPLabel, Dst, Src);
+    unsigned Reg = MRI.getDwarfRegNum(Epiphany::SP, true);
+    MMI.addFrameInst(
+        MCCFIInstruction::createDefCfa(SPLabel, Reg, -NumInitialBytes));
   }
 
   // Otherwise we need to set the frame pointer and/or add a second stack
@@ -163,8 +165,9 @@ void EpiphanyFrameLowering::emitPrologue(MachineFunction &MF) const {
       .addSym(CSLabel);
 
     MachineLocation Dst(MachineLocation::VirtualFP);
-    MachineLocation Src(Epiphany::SP, NumResidualBytes + NumInitialBytes);
-    MMI.addFrameMove(CSLabel, Dst, Src);
+    unsigned Reg = MRI.getDwarfRegNum(Epiphany::SP, true);
+    unsigned Offset = NumResidualBytes + NumInitialBytes;
+    MMI.addFrameInst(MCCFIInstruction::createDefCfa(CSLabel, Reg, -Offset));
   }
 
   // And any callee-saved registers (it's fine to leave them to the end here,
@@ -179,10 +182,9 @@ void EpiphanyFrameLowering::emitPrologue(MachineFunction &MF) const {
 
     for (std::vector<CalleeSavedInfo>::const_iterator I = CSI.begin(),
            E = CSI.end(); I != E; ++I) {
-      MachineLocation Dst(MachineLocation::VirtualFP,
-                          MFI->getObjectOffset(I->getFrameIdx()));
-      MachineLocation Src(I->getReg());
-      MMI.addFrameMove(CSLabel, Dst, Src);
+      unsigned Offset = MFI->getObjectOffset(I->getFrameIdx());
+      unsigned Reg = MRI.getDwarfRegNum(I->getReg(), true);
+      MMI.addFrameInst(MCCFIInstruction::createOffset(CSLabel, Reg, Offset));
     }
   }
 }
